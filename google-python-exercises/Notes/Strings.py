@@ -80,8 +80,33 @@ i18n Strings (Unicode)
 	  > ustring = u'A unicode \u018e string \xf1'
 	  > ustring
 	  u'A unicode \u018e string \xf1'
+	2. ustring.encode('utf-8') 把unicode string -> bytes with an encoding such as 'utf-8'
+	3. unicode(s, encoding)      encoded plain bytes -> unicode string
 
 
+		## (ustring from above contains a unicode string)
+		> s = ustring.encode('utf-8')
+		> s
+		'A unicode \xc6\x8e string \xc3\xb1'  ## bytes of utf-8 encoding
+		> t = unicode(s, 'utf-8')             ## Convert bytes back to a unicode string
+		> t == ustring                      ## It's the same as the original, yay!
+		True
+
+
+If Statement
+	1. if condition: ... elif condition: ... else: ...
+	2. '0'都是false：None，0，empty string，empty list， empty dictionary
+
+
+	if speed >= 80:
+		print 'License and registration please'
+	    if mood == 'terrible' or speed >= 100:
+	      print 'You have the right to remain silent.'
+	    elif mood == 'bad' or speed >= 90:
+	      print "I'm going to have to write you a ticket."
+	      write_ticket()
+	    else:
+	      print "Let's try to keep it under 80 ok?"
 
 
 
