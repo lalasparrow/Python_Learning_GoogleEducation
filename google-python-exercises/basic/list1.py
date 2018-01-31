@@ -22,7 +22,12 @@
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
   # +++your code here+++
-  return
+  count = 0
+  for word in words:
+    if len(word) >= 2 and word[0] == word[len(word)-1]:
+      count = count + 1
+
+  return count
 
 
 # B. front_x
@@ -34,9 +39,31 @@ def match_ends(words):
 # before combining them.
 def front_x(words):
   # +++your code here+++
-  return
 
+  begin_x = []
+  begin_not_x = []
 
+  for word in words:
+    if word[0] == 'x':
+      begin_x.append(word)
+    else:
+      begin_not_x.append(word)
+
+  begin_x.sort()
+  begin_not_x.sort()
+  return begin_x + begin_not_x
+
+  # It seems like with two continuous 'x' begin words, after removing from words list, the second 'x' begin words will be omitted, 
+  # since changes happen in the original words  
+
+  # for word in words:
+  #   if word[0] == 'x':
+  #     begin_x.append(word)
+  #     words.remove(word)
+
+  # begin_x.sort()
+  # words.sort()
+  # return begin_x + words
 
 # C. sort_last
 # Given a list of non-empty tuples, return a list sorted in increasing
@@ -46,8 +73,26 @@ def front_x(words):
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
   # +++your code here+++
-  return
+  res_list = []
+  for tuple in tuples:
+    # key = tuple[len(tuple) - 1]
+    key = key_cal(tuple)
+    flag = 0
 
+    for i in range(0, len(res_list)):
+      res_elem = res_list[i]
+      # res_elem_key = res_elem[len(res_elem) - 1]
+      res_elem_key = key_cal(res_elem)
+      if res_elem_key >= key:
+        res_list.insert(i, tuple)
+        flag = 1
+        break
+    if flag == 0:
+      res_list.append(tuple)
+  return res_list
+
+def key_cal(tuple):
+  return tuple[len(tuple) - 1]
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
