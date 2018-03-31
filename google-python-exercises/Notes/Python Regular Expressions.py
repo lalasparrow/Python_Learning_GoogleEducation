@@ -155,11 +155,21 @@ Options: 可以选定pattern match的方式
 
 
 Greedy vs. Non-Greedy (optional)
+	因为".*"可以match所有东西，所以在"<b>foo</b> and <i>so on</i>"里面，".*"会match整个txt。
+	这是因为，".*"是greedy的，会尽可能多的match。（greedy）
+
+	可以用"[^>]*"来跳过所有不是">"的东西，终结在">"
+
+Substitution (optional)
+	re.sub(pat, replacement, str) 可以找所有的str中满足pattern的地方，然后替换他们
 
 
-
-
-
+	example, 找到所有的email address，把host变成"yo-yo-dyne"，user(\1)不变:
+		  str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
+		  ## re.sub(pat, replacement, str) -- returns new string with all replacements,
+		  ## \1 is group(1), \2 group(2) in the replacement
+		  print re.sub(r'([\w\.-]+)@([\w\.-]+)', r'\1@yo-yo-dyne.com', str)
+		  ## purple alice@yo-yo-dyne.com, blah monkey bob@yo-yo-dyne.com blah dishwasher
 
 
 
